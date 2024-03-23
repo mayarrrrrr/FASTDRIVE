@@ -1,5 +1,5 @@
 from sqlalchemy.orm import declarative_base,sessionmaker,relationship
-from sqlalchemy import create_engine,Column,Integer,String,ForeignKey,DateTime,Float,Table,func
+from sqlalchemy import create_engine,Column,Integer,String,ForeignKey,DateTime,Float,Table,func,desc
 
 
 Base = declarative_base()
@@ -9,8 +9,12 @@ client_driver = Table(
     Base.metadata,
     
     Column('client_id',ForeignKey('clients.id'),primary_key=True),
+    # Column('client_name',ForeignKey('clients.name')),
+    # Column('driver_name',ForeignKey('drivers.name')),
+      
     Column("driver_id",ForeignKey('drivers.id'),primary_key=True),
     extend_existing= True
+  
     
 )
 
@@ -60,7 +64,9 @@ class Trip(Base):
     start_location = Column(String, nullable=False)
     end_location = Column(String, nullable=False)
     start_time = Column(DateTime(), server_default=func.now())
-    end_time = Column(DateTime(), onupdate=func.now())
+    end_time = Column(DateTime(), server_default=func.now())
+    
+   
     Price = Column(Float)
     
     def __repr__(self):

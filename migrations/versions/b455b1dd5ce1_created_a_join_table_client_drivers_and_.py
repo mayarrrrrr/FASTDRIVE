@@ -34,7 +34,7 @@ def upgrade():
     sa.Column('start_time', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('end_time', sa.DateTime(), nullable=True),
     sa.Column('Price', sa.Float(), nullable=True),
-    sa.ForeignKeyConstraint(['customer_id'], ['clients.id'], ),
+    sa.ForeignKeyConstraint(['client_id'], ['clients.id'], ),
     sa.ForeignKeyConstraint(['driver_id'], ['drivers.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
