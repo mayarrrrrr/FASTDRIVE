@@ -10,11 +10,13 @@ def add_client():
     mysession.commit()
     
 def list_drivers():
-    
     drivers = mysession.query(Driver).all()
-    # return drivers
+    driver_list = []
     for driver in drivers:
-        print([driver.name,driver.location])
+        driver_dict = {'name': driver.name, 'location': driver.location}
+        driver_list.append(driver_dict)
+    print(driver_list)    
+    return driver_list
         
 def get_client_id_by_name(client_name):
     client = mysession.query(Client).filter_by(name=client_name).first()
@@ -43,7 +45,7 @@ def confirm_trip():
     # Obtain client and driver IDs
     client_id = get_client_id_by_name(client_name)
     driver_id = get_driver_id_by_name(driver_name)
-    print(client_id)
+    print("The trip has been confirmed and successfully added to our database.")
     
     if client_id is None:
         print("Client not found.You would want to make sure the name matches the logged name.Please try again.")
